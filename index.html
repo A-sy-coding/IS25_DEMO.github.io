@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	<title>TSPT-VC: Feature Disentanglement with Timbre Self-Perturbed Transformation and Implicit Duration Guidance for Voice Conversion </title>
+	<meta name="generator" content="Jekyll v3.9.0">
+	<meta property="og:title" content="TSPT-VC: Feature Disentanglement with Timbre Self-Perturbed Transformation and Implicit Duration Guidance for Voice Conversion">
+	<meta property="og.locale" content ="en_US">
+	<link rel="canonical" href="https://github.com/A-sy-coding/IS25_DEMO/">
+	<meta property="og:url" content="https://github.com/A-sy-coding/IS25_DEMO/">
+	<meta name="twitter:card" content="summary">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="theme-color" content="#157878">
+	<link rel="stylesheet" href="./style.css">
+</head>
+
+<section class = "page-header">
+</section>
+
+<section class="main-context">
+	<h1 id=""><center>TSPT-VC: Feature Disentanglement with Timbre Self-Perturbed Transformation and Implicit Duration Guidance for Voice Conversion</center></h1>
+
+	<!-- <div style="display: none;"> -->
+  <div style="display: block;"></div>
+	  <center>Sang-Young An<sup>1</sup>, Nam-Seok Song<sup>2</sup> and Joon-Hyuk Chang<sup>&#8224;</sup></center>
+	  <br>
+    <center>Department of Artificial Intelligence Application Hanyang University, Seoul, Republic of Korea <sup>1</sup></center>
+	  <center>Department of Electronic Engineering, Hanyang University, Seoul, Republic of Korea <sup>2, &#8224;</sup></center>
+	  <center>tbvjzsk@hanyang.ac.kr<sup>1</sup>,&nbsp;&nbsp;&nbsp; insang99@hanyang.ac.kr<sup>2</sup>, &nbsp;&nbsp;&nbsp; jchang@hanyang.ac.kr<sup>&#8224;</sup></center>
+	</div>
+
+	<!-- 대체 텍스트 -->
+	<!-- <div>
+	  <center><i>Anonymous submission to Interspeech 2025</i></center>
+	</div> -->
+
+  <br>
+	<center><h2 id="abstract">Abstract</h2></center>
+	<br>
+  <div id="abstract_content">
+    <p>
+      Separating linguistic content, timbre, pitch, and rhythm in voice conversion remains challenging due to feature entanglement, which degrades synthesized speech quality and impairs the accurate transfer of the target speaker's identity. To address this issue, we propose TSPT-VC, a novel framework integrating three key components: (1) a timbre self-perturbed transformation module for enhanced timbre extraction, (2) an implicit duration guidance module for improved rhythm modeling, and (3) a cascade SSL content encoder for better linguistic information preservation.
+      Experimental results, including objective metrics and mean opinion score (MOS) evaluations, demonstrate that TSPT-VC outperforms baseline models in timbre transfer, content preservation, pitch accuracy, and rhythm consistency. Furthermore, it produces more natural speech and achieves greater similarity to the target speaker, highlighting its effectiveness in voice conversion.
+    </p>
+  </div>
+	<br>
+	<center><h2><p class="TSPT_title">Contents</p></h2></center>
+	<div id="TSPT_container" style="font-size: 18px;">
+		<ol>
+			<li><a href="#1">Model Architecture</a></li>
+			<li><a href="#2">Demo Samples</a></li>
+			<li><a href="#3">Evaluation Results</a></li>
+		</ol>
+	</div>
+	<br>
+	<center><a name="1"><h2>1. Model Architecture</h2></a></center>
+	<div style="margin-top: 10px;">
+	  <div style="margin-bottom: 20px; padding: 0 40px;">
+	    <center>
+	  <img src="./model_architecture.png" style="max-width: 100%; height: auto;" title="Proposed Model Architecture">
+	</center>
+	  </div>
+	  <br>
+	</div>
+
+
+	<br>	
+	<div id=conversion style="overflow-x: auto;">
+    <center><a name="2"><h2 style="margin-bottom: 0px;">2. Demo Samples</h2></a></center>
+    <br>	
+    <h3>2.1. Pitch Conversion</h3>
+	  <table style="border-collapse: collapse; width: 100%; font-size: 16px; text-align: center;">
+	    <!-- <tr>
+	      <th colspan="7" style="font-size: 20px; padding: 15px; border-bottom: 2px solid black;">Single Speech Demos</th>
+	    </tr> -->
+	    <tr>
+	      <th style="border-top: 1px solid black; border-bottom: 1px solid black;">Source</th>
+	      <th style="border-top: 1px solid black; border-bottom: 1px solid black;">Target</th>
+	      <th style="border-top: 1px solid black; border-bottom: 1px solid black;">Speechsplit</th>
+	      <th style="border-top: 1px solid black; border-bottom: 1px solid black;">Speechsplit2</th>
+	      <th style="border-top: 1px solid black; border-bottom: 1px solid black;">TSPT-VC</th>
+	    </tr>
+      <tr>
+        <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="demo_samples/pitch/pitch_conversion_sample_01/source.wav" controls preload></audio></td>
+        <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="demo_samples/pitch/pitch_conversion_sample_01/target.wav" controls preload></audio></td>
+        <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="demo_samples/pitch/pitch_conversion_sample_01/speechsplit.wav" controls preload></audio></td>
+        <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="demo_samples/pitch/pitch_conversion_sample_01/speechsplit2.wav" controls preload></audio></td>
+        <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="demo_samples/pitch/pitch_conversion_sample_01/TSPT_VC.wav" controls preload></audio></td>        
+    </tr>
+
+    <tr>
+      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="demo_samples/pitch/pitch_conversion_sample_02/source.wav" controls preload></audio></td>
+      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="demo_samples/pitch/pitch_conversion_sample_02/target.wav" controls preload></audio></td>
+      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="demo_samples/pitch/pitch_conversion_sample_02/speechsplit.wav" controls preload></audio></td>
+      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="demo_samples/pitch/pitch_conversion_sample_02/speechsplit2.wav" controls preload></audio></td>
+      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="demo_samples/pitch/pitch_conversion_sample_02/TSPT_VC.wav" controls preload></audio></td>        
+  </tr>
+
+  <tr>
+    <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="demo_samples/pitch/pitch_conversion_sample_03/source.wav" controls preload></audio></td>
+    <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="demo_samples/pitch/pitch_conversion_sample_03/target.wav" controls preload></audio></td>
+    <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="demo_samples/pitch/pitch_conversion_sample_03/speechsplit.wav" controls preload></audio></td>
+    <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="demo_samples/pitch/pitch_conversion_sample_03/speechsplit2.wav" controls preload></audio></td>
+    <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="demo_samples/pitch/pitch_conversion_sample_03/TSPT_VC.wav" controls preload></audio></td>        
+  </tr>
+
+  <tr>
+    <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="demo_samples/pitch/pitch_conversion_sample_04/source.wav" controls preload></audio></td>
+    <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="demo_samples/pitch/pitch_conversion_sample_04/target.wav" controls preload></audio></td>
+    <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="demo_samples/pitch/pitch_conversion_sample_04/speechsplit.wav" controls preload></audio></td>
+    <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="demo_samples/pitch/pitch_conversion_sample_04/speechsplit2.wav" controls preload></audio></td>
+    <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="demo_samples/pitch/pitch_conversion_sample_04/TSPT_VC.wav" controls preload></audio></td>        
+  </tr>
+
+  <tr>
+    <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="demo_samples/pitch/pitch_conversion_sample_05/source.wav" controls preload></audio></td>
+    <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="demo_samples/pitch/pitch_conversion_sample_05/target.wav" controls preload></audio></td>
+    <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="demo_samples/pitch/pitch_conversion_sample_05/speechsplit.wav" controls preload></audio></td>
+    <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="demo_samples/pitch/pitch_conversion_sample_05/speechsplit2.wav" controls preload></audio></td>
+    <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="demo_samples/pitch/pitch_conversion_sample_05/TSPT_VC.wav" controls preload></audio></td>        
+  </tr>
+	  </table>
+	</div>
+
+	<br>
+
+<div id=conversion style="overflow-x: auto;">
+  <h3>2.2. Rhythm Conversion</h3>
+  <table style="border-collapse: collapse; width: 100%; font-size: 16px; text-align: center;">
+    <!-- <tr>
+      <th colspan="8" style="font-size: 20px; padding: 15px; border-bottom: 2px solid black;">Dialogue Speech Demos</th>
+    </tr> -->
+    <tr>
+      <th style="border-top: 1px solid black; border-bottom: 1px solid black;">Source</th>
+      <th style="border-top: 1px solid black; border-bottom: 1px solid black;">Target</th>
+      <th style="border-top: 1px solid black; border-bottom: 1px solid black;">Speechsplit</th>
+      <th style="border-top: 1px solid black; border-bottom: 1px solid black;">Speechsplit2</th>
+      <th style="border-top: 1px solid black; border-bottom: 1px solid black;">TSPT-VC</th>
+    </tr>
+    <tr>
+      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="demo_samples/rhythm/rhythm_conversion_sample_01/source.wav" controls preload></audio></td>
+      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="demo_samples/rhythm/rhythm_conversion_sample_01/target.wav" controls preload></audio></td>
+      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="demo_samples/rhythm/rhythm_conversion_sample_01/speechsplit.wav" controls preload></audio></td>
+      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="demo_samples/rhythm/rhythm_conversion_sample_01/speechsplit2.wav" controls preload></audio></td>
+      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="demo_samples/rhythm/rhythm_conversion_sample_01/TSPT_VC.wav" controls preload></audio></td>        
+    </tr>
+
+    <tr>
+      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="demo_samples/rhythm/rhythm_conversion_sample_02/source.wav" controls preload></audio></td>
+      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="demo_samples/rhythm/rhythm_conversion_sample_02/target.wav" controls preload></audio></td>
+      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="demo_samples/rhythm/rhythm_conversion_sample_02/speechsplit.wav" controls preload></audio></td>
+      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="demo_samples/rhythm/rhythm_conversion_sample_02/speechsplit2.wav" controls preload></audio></td>
+      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="demo_samples/rhythm/rhythm_conversion_sample_02/TSPT_VC.wav" controls preload></audio></td>        
+    </tr>
+
+    <tr>
+      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="demo_samples/rhythm/rhythm_conversion_sample_03/source.wav" controls preload></audio></td>
+      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="demo_samples/rhythm/rhythm_conversion_sample_03/target.wav" controls preload></audio></td>
+      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="demo_samples/rhythm/rhythm_conversion_sample_03/speechsplit.wav" controls preload></audio></td>
+      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="demo_samples/rhythm/rhythm_conversion_sample_03/speechsplit2.wav" controls preload></audio></td>
+      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="demo_samples/rhythm/rhythm_conversion_sample_03/TSPT_VC.wav" controls preload></audio></td>        
+    </tr>
+
+    <tr>
+      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="demo_samples/rhythm/rhythm_conversion_sample_04/source.wav" controls preload></audio></td>
+      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="demo_samples/rhythm/rhythm_conversion_sample_04/target.wav" controls preload></audio></td>
+      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="demo_samples/rhythm/rhythm_conversion_sample_04/speechsplit.wav" controls preload></audio></td>
+      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="demo_samples/rhythm/rhythm_conversion_sample_04/speechsplit2.wav" controls preload></audio></td>
+      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="demo_samples/rhythm/rhythm_conversion_sample_04/TSPT_VC.wav" controls preload></audio></td>        
+    </tr>
+
+    <tr>
+      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="demo_samples/rhythm/rhythm_conversion_sample_05/source.wav" controls preload></audio></td>
+      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="demo_samples/rhythm/rhythm_conversion_sample_05/target.wav" controls preload></audio></td>
+      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="demo_samples/rhythm/rhythm_conversion_sample_05/speechsplit.wav" controls preload></audio></td>
+      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="demo_samples/rhythm/rhythm_conversion_sample_05/speechsplit2.wav" controls preload></audio></td>
+      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="demo_samples/rhythm/rhythm_conversion_sample_05/TSPT_VC.wav" controls preload></audio></td>        
+    </tr>
+
+  </table>
+</div>
+
+<br>
+
+<div id=conversion style="overflow-x: auto;">
+  <h3>2.3. Timbre Conversion</h3>
+  <table style="border-collapse: collapse; width: 100%; font-size: 16px; text-align: center;">
+    <!-- <tr>
+      <th colspan="8" style="font-size: 20px; padding: 15px; border-bottom: 2px solid black;">Dialogue Speech Demos</th>
+    </tr> -->
+    <tr>
+      <th style="border-top: 1px solid black; border-bottom: 1px solid black;">Source</th>
+      <th style="border-top: 1px solid black; border-bottom: 1px solid black;">Target</th>
+      <th style="border-top: 1px solid black; border-bottom: 1px solid black;">Speechsplit</th>
+      <th style="border-top: 1px solid black; border-bottom: 1px solid black;">Speechsplit2</th>
+      <th style="border-top: 1px solid black; border-bottom: 1px solid black;">TSPT-VC</th>
+    </tr>
+    <tr>
+      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="demo_samples/timbre/timbre_conversion_sample_01/source.wav" controls preload></audio></td>
+      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="demo_samples/timbre/timbre_conversion_sample_01/target.wav" controls preload></audio></td>
+      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="demo_samples/timbre/timbre_conversion_sample_01/speechsplit.wav" controls preload></audio></td>
+      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="demo_samples/timbre/timbre_conversion_sample_01/speechsplit2.wav" controls preload></audio></td>
+      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="demo_samples/timbre/timbre_conversion_sample_01/TSPT_VC.wav" controls preload></audio></td>        
+    </tr>
+
+    <tr>
+      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="demo_samples/timbre/timbre_conversion_sample_02/source.wav" controls preload></audio></td>
+      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="demo_samples/timbre/timbre_conversion_sample_02/target.wav" controls preload></audio></td>
+      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="demo_samples/timbre/timbre_conversion_sample_02/speechsplit.wav" controls preload></audio></td>
+      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="demo_samples/timbre/timbre_conversion_sample_02/speechsplit2.wav" controls preload></audio></td>
+      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="demo_samples/timbre/timbre_conversion_sample_02/TSPT_VC.wav" controls preload></audio></td>        
+    </tr>
+
+    <tr>
+      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="demo_samples/timbre/timbre_conversion_sample_03/source.wav" controls preload></audio></td>
+      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="demo_samples/timbre/timbre_conversion_sample_03/target.wav" controls preload></audio></td>
+      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="demo_samples/timbre/timbre_conversion_sample_03/speechsplit.wav" controls preload></audio></td>
+      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="demo_samples/timbre/timbre_conversion_sample_03/speechsplit2.wav" controls preload></audio></td>
+      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="demo_samples/timbre/timbre_conversion_sample_03/TSPT_VC.wav" controls preload></audio></td>        
+    </tr>
+
+    <tr>
+      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="demo_samples/timbre/timbre_conversion_sample_04/source.wav" controls preload></audio></td>
+      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="demo_samples/timbre/timbre_conversion_sample_04/target.wav" controls preload></audio></td>
+      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="demo_samples/timbre/timbre_conversion_sample_04/speechsplit.wav" controls preload></audio></td>
+      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="demo_samples/timbre/timbre_conversion_sample_04/speechsplit2.wav" controls preload></audio></td>
+      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="demo_samples/timbre/timbre_conversion_sample_04/TSPT_VC.wav" controls preload></audio></td>        
+    </tr>
+
+    <tr>
+      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="demo_samples/timbre/timbre_conversion_sample_05/source.wav" controls preload></audio></td>
+      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="demo_samples/timbre/timbre_conversion_sample_05/target.wav" controls preload></audio></td>
+      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="demo_samples/timbre/timbre_conversion_sample_05/speechsplit.wav" controls preload></audio></td>
+      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="demo_samples/timbre/timbre_conversion_sample_05/speechsplit2.wav" controls preload></audio></td>
+      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="demo_samples/timbre/timbre_conversion_sample_05/TSPT_VC.wav" controls preload></audio></td>        
+    </tr>
+
+  </table>
+</div>
+
+
+	<br>
+	<br>
+
+<div id="conversion">
+  <center><a name="3"><h2>3. Evaluation Results</h2></a></center>
+  
+    <h3>3.1. Feature Conversion and Disentanglement Performance</h3>
+      <center>
+        <img src="./Table2.png" alt="Image description" class="uniform-img" >
+      </center>
+    <br>
+    <h3>3.2. Voice Conversion Performance</h3>
+      <center>
+        <img src="./Table1.png" alt="Image description" class="uniform-img">
+      </center>
+    <br>
+    <h3>3.3. Ablation Study</h3>
+      <center>
+        <img src="./Table3.png" alt="Image description" class="uniform-img">
+      </center>
+</div>
+
+
+</section>
+
+<br>
+<br>
+<br>
+<br>
+<hr>
+<footer class="site-footer">
+<span class="site-footer-credits">This page was generated by <a href="https://pages.github.com/">GitHub Pages</a>.</span>
+</footer>
+</section>
+</body>
+<grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration>
+
+</html>
